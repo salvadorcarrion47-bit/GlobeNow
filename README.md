@@ -1,6 +1,6 @@
 # 🌍 GlobeNow - Información Global, al Instante
 
-**GlobeNow** es una aplicación web moderna que centraliza información global incluyendo divisas, criptomonedas, clima, parqueos gratuitos y **reloj de zonas horarias en tiempo real**. Caracterizada por su soporte multiidioma, modo oscuro automático y diseño responsivo.
+**GlobeNow** es una aplicación web moderna que centraliza información global incluyendo divisas, criptomonedas, clima, parqueos gratuitos, **reloj de zonas horarias en tiempo real** y **gestor de parqueos**. Caracterizada por su soporte multiidioma, modo oscuro automático y diseño responsivo.
 
 ## ✨ Características Principales
 
@@ -16,7 +16,7 @@
 - **Animaciones fluidas**: Transiciones suaves y agradables
 - **Diseño moderno**: Componentes visuales limpios y profesionales
 
-### 📱 Dos Modos de Visualización
+### 📱 Tres Modos de Visualización
 
 #### 1. **Inicio (index.html)** - Panel Principal
 Información global con 4 secciones:
@@ -43,7 +43,7 @@ Información global con 4 secciones:
    - Ubicación de parqueos
    - Porcentaje de ocupación
 
-#### 2. **Reloj de Zonas Horarias (timezone-clock.html)** ⏰ NUEVO
+#### 2. **Reloj de Zonas Horarias (timezone-clock.html)** ⏰ 
 Reloj digital con soporte para múltiples zonas horarias:
 
 - ⏰ **Reloj Digital**: Tiempo en formato 12/24h
@@ -54,18 +54,34 @@ Reloj digital con soporte para múltiples zonas horarias:
 - 📅 **Información Complementaria**: Fecha y estado del día
 - 💾 **Persistencia**: Guarda tus preferencias
 
+#### 3. **Gestor de Parqueos (parking-manager.html)** 🅿️ NUEVO
+Crea y gestiona tus parqueos gratuitos:
+
+- **➕ Crear Parqueos**: Formulario completo con validación
+- **✏️ Editar Parqueos**: Modifica información fácilmente
+- **🗑️ Eliminar Parqueos**: Remueve parqueos innecesarios
+- **📊 Monitoreo**: Visualiza disponibilidad en tiempo real
+- **🔔 Información Completa**: Nombre, dirección, horarios, contacto
+- **💾 Persistencia**: Todos los datos se guardan en localStorage
+- **🎯 Tipos**: Calle, Lote, Garaje, Valet
+- **📱 Responsive**: Funciona en todos los dispositivos
+
 ## 📋 Estructura del Proyecto
 
 ```
 GlobeNow/
 ├── index.html                    # Página principal (divisas, crypto, clima, parqueos)
 ├── timezone-clock.html           # Reloj de zonas horarias
+├── parking-manager.html          # Gestor de parqueos
 ├── style.css                     # Estilos globales
 ├── timezone-clock.css            # Estilos del reloj
+├── parking-manager.css           # Estilos del gestor de parqueos
 ├── i18n.js                       # Sistema de traducción
 ├── app.js                        # Lógica principal
 ├── timezone-clock.js             # Lógica del reloj de zonas
+├── parking-manager.js            # Lógica del gestor de parqueos
 ├── i18n-extended.json            # Traducciones adicionales
+├── i18n-parking.json             # Traducciones de parqueos
 ├── README.md                     # Este archivo
 └── assets/                       # (Opcional) Imágenes y recursos
 ```
@@ -87,14 +103,17 @@ Abre los archivos HTML directamente en tu navegador. No requiere servidor ni ins
 # macOS
 open index.html
 open timezone-clock.html
+open parking-manager.html
 
 # Windows
 start index.html
 start timezone-clock.html
+start parking-manager.html
 
 # Linux
 xdg-open index.html
 xdg-open timezone-clock.html
+xdg-open parking-manager.html
 ```
 
 ## 🎯 Guía del Reloj de Zonas Horarias
@@ -121,30 +140,74 @@ El reloj incluye 50+ zonas horarias de:
 - **📱 Formato 24h**: Cambia entre formato 12/24 horas
 - **🌙 Modo Oscuro**: Automático según preferencias del sistema
 
-### Detalles Visuales
+## 🎯 Guía del Gestor de Parqueos
 
-Cada zona horaria muestra:
-- **Nombre de la ciudad** y código de zona
-- **Reloj digital** con actualización en tiempo real
-- **Reloj analógico mini** con manecillas
-- **Fecha** actual en esa zona
-- **Estado del día** (Día ☀️, Tarde, Atardecer 🌅, Noche 🌙)
+### Crear un Nuevo Parqueo
+
+1. Haz clic en **"+ Agregar Parqueo"**
+2. Completa el formulario con:
+   - **Nombre**: Nombre del parqueo
+   - **Dirección**: Ubicación completa
+   - **Espacios Totales**: Número total de espacios
+   - **Espacios Disponibles**: Espacios libres en este momento
+   - **Horario**: Apertura y cierre (opcional)
+   - **Tipo**: Calle, Lote, Garaje o Valet
+   - **Descripción**: Información adicional (opcional)
+   - **Teléfono**: Contacto (opcional)
+
+### Funcionalidades Principales
+
+#### Editar Parqueos
+- Haz clic en el botón **✏️ Editar** en cualquier tarjeta
+- Modifica los datos que necesites
+- Guarda los cambios
+
+#### Eliminar Parqueos
+- Haz clic en el botón **🗑️ Eliminar**
+- Confirma la acción
+- El parqueo se eliminará permanentemente
+
+#### Monitoreo Visual
+- **Barra de disponibilidad**: Muestra visualmente el porcentaje de ocupación
+- **Estados**: 
+  - 🟢 Verde (>30%): Disponibles
+  - 🟡 Amarillo (1-30%): Limitados
+  - 🔴 Rojo (0%): Lleno
+- **Información en tiempo real**: Todos los datos se actualizan automáticamente
+
+### Validación de Datos
+
+El formulario valida:
+- ✅ Campo requerido: Nombre
+- ✅ Campo requerido: Dirección
+- ✅ Campo requerido: Espacios totales
+- ✅ Espacios disponibles ≤ Espacios totales
+- ✅ Números válidos en espacios
 
 ### Ejemplo de Uso
 
 ```javascript
-// Acceder al controlador del reloj
-const clock = window.timezoneClock;
+// Acceder al gestor de parqueos
+const manager = window.parkingManager;
 
-// Agregar zona
-clock.addTimezone('America/New_York');
+// Obtener todos los parqueos
+console.log(manager.parkings);
 
-// Marcar como favorito
-clock.toggleFavorite('Asia/Tokyo');
-
-// Obtener tiempo en una zona
-const time = clock.getTimeInTimezone('Europe/London');
-console.log(time); // { hour: '14', minute: '30', second: '45', ... }
+// Crear nuevo parqueo (por formulario en la interfaz)
+// O crear programáticamente:
+const newParking = {
+  id: Date.now(),
+  name: "Parqueo Nueva York",
+  address: "Av. Nueva 999",
+  total: 200,
+  available: 85,
+  openTime: "06:00",
+  closeTime: "23:00",
+  type: "garage",
+  description: "Nuevo garaje de 8 pisos",
+  phone: "+1-809-555-5555",
+  createdAt: new Date().toISOString()
+};
 ```
 
 ## 🛠️ Tecnologías Utilizadas
@@ -173,6 +236,7 @@ const translations = {
     appName: "GlobeNow",
     slogan: "Globale Informationen sofort",
     timezoneClock: "Zeitzonen-Uhr",
+    parkingManager: "Parkplatz-Manager",
     // ... más traducciones
   }
 };
@@ -226,9 +290,20 @@ En `style.css`, modifica las variables CSS:
 - **Manual**: Usa el botón en el footer (🌙)
 - **Persistente**: Se guarda en localStorage
 
+## 💾 Persistencia de Datos
+
+Todos los datos se guardan localmente en el navegador usando `localStorage`:
+
+- **Idioma**: `globenow-language`
+- **Modo Oscuro**: `globenow-darkmode`
+- **Zonas Horarias**: `globenow-timezones`
+- **Favoritos**: `globenow-favorites`
+- **Parqueos**: `globenow-parkings`
+- **Formato 24h**: `globenow-24hformat`
+
 ## 📊 Datos Simulados
 
-Actualmente, los datos mostrados son simulados. Para implementar APIs reales:
+Actualmente, los datos de divisas, criptomonedas y clima son simulados. Para implementar APIs reales:
 
 ### Divisas
 - Usar: [Open Exchange Rates](https://openexchangerates.org/)
@@ -241,9 +316,6 @@ Actualmente, los datos mostrados son simulados. Para implementar APIs reales:
 ### Clima
 - Usar: [OpenWeatherMap](https://openweathermap.org/api)
 - Endpoint: `https://api.openweathermap.org/data/2.5/weather`
-
-### Parqueos
-- Implementar con datos locales o API municipal
 
 ## 💡 Ejemplo de Integración de API Real
 
@@ -264,6 +336,7 @@ async loadCryptoReal() {
 - **GitHub**: [salvadorcarrion47-bit/GlobeNow](https://github.com/salvadorcarrion47-bit/GlobeNow)
 - **Página Principal**: [index.html](index.html)
 - **Reloj de Zonas**: [timezone-clock.html](timezone-clock.html)
+- **Gestor de Parqueos**: [parking-manager.html](parking-manager.html)
 - **Issues**: [Reportar Problemas](https://github.com/salvadorcarrion47-bit/GlobeNow/issues)
 - **Discussions**: [Discusiones](https://github.com/salvadorcarrion47-bit/GlobeNow/discussions)
 
@@ -288,6 +361,16 @@ Este proyecto está bajo la licencia MIT. Ver `LICENSE` para más detalles.
 - Email: salvadorcarrion47@gmail.com
 
 ## 🎉 Cambios Recientes
+
+### v3.0 - Gestor de Parqueos
+- ✅ Nuevo módulo de gestión de parqueos
+- ✅ CRUD completo (Crear, Leer, Actualizar, Eliminar)
+- ✅ Validación de formularios
+- ✅ Visualización de disponibilidad
+- ✅ Tipos de parqueo (Calle, Lote, Garaje, Valet)
+- ✅ Información de horarios y contacto
+- ✅ Persistencia en localStorage
+- ✅ Soporte multiidioma
 
 ### v2.0 - Reloj de Zonas Horarias
 - ✅ Nuevo módulo de reloj digital multizona
