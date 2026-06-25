@@ -1,5 +1,5 @@
 
-// --- CRIPTOMONEDAS EN TIEMPO REAL (WebSocket) ---
+
 
 let btcWS = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@trade");
 let ethWS = new WebSocket("wss://stream.binance.com:9443/ws/ethusdt@trade");
@@ -23,7 +23,6 @@ function updateCryptoUI(coin, price) {
 }
 
 
-// --- DIVISAS (actualización cada 60s) ---
 
 async function loadCurrencies() {
   const res = await fetch("https://api.currencyapi.com/v3/latest?apikey=cur_live_demo");
@@ -42,7 +41,7 @@ async function loadCurrencies() {
 loadCurrencies();
 setInterval(loadCurrencies, 60000); // cada 1 minuto
 
-// --- CLIMA (actualización cada 60s) ---
+
 
 async function loadWeather() {
   const res = await fetch("https://api.open-meteo.com/v1/forecast?latitude=48.85&longitude=2.35&current_weather=true");
@@ -56,7 +55,7 @@ async function loadWeather() {
 loadWeather();
 setInterval(loadWeather, 60000);
 
-// --- PARQUEOS (actualización cada 5 min) ---
+
 
 async function loadParking() {
   const query = `
