@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="parkingManager">Gestor de Parqueos</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="parking-manager.css">
+</head>
+<body>
+  <!-- HEADER CON SELECTOR DE IDIOMA -->
+  <header class="hero">
+    <div class="hero-logo">
+      <span class="logo-icon">🅿️</span>
+      <span class="logo-text" data-i18n="parkingManager">Gestor de Parqueos</span>
+    </div>
+
+    <p class="hero-slogan" data-i18n="parkingSlogan">Crea y gestiona parqueos gratuitos</p>
+
+    <div class="lang-selector">
+      <label for="language" data-i18n="selectLanguage">Idioma:</label>
+      <select id="language">
+        <option value="es">🇪🇸 Español</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="fr">🇫🇷 Français</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="parking-container">
+    <!-- BOTÓN AGREGAR PARQUEO -->
+    <div class="parking-header">
+      <h2 data-i18n="myParkings">Mis Parqueos</h2>
+      <button id="add-parking-btn" class="btn btn-primary btn-lg" data-i18n="addParking">+ Agregar Parqueo</button>
+    </div>
+
+    <!-- MODAL PARA AGREGAR/EDITAR PARQUEO -->
+    <div id="parking-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="modal-title" data-i18n="newParking">Nuevo Parqueo</h3>
+          <button class="modal-close" id="close-modal">&times;</button>
+        </div>
+
+        <form id="parking-form" class="parking-form">
+          <!-- Nombre del Parqueo -->
+          <div class="form-group">
+            <label for="parking-name" data-i18n="parkingName">Nombre del Parqueo</label>
+            <input 
+              type="text" 
+              id="parking-name" 
+              required 
+              placeholder="Ej: Parqueo Centro"
+              data-i18n-placeholder="parkingNamePlaceholder"
+            >
+            <span class="form-error" id="name-error"></span>
+          </div>
+
+          <!-- Dirección -->
+          <div class="form-group">
+            <label for="parking-address" data-i18n="address">Dirección</label>
+            <input 
+              type="text" 
+              id="parking-address" 
+              required
+              placeholder="Ej: Av. Independencia 123"
+              data-i18n-placeholder="addressPlaceholder"
+            >
+            <span class="form-error" id="address-error"></span>
+          </div>
+
+          <!-- Espacios Totales -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="parking-total" data-i18n="totalSpaces">Espacios Totales</label>
+              <input 
+                type="number" 
+                id="parking-total" 
+                min="1" 
+                required
+                placeholder="150"
+              >
+              <span class="form-error" id="total-error"></span>
+            </div>
+
+            <!-- Espacios Disponibles -->
+            <div class="form-group">
+              <label for="parking-available" data-i18n="availableSpaces">Espacios Disponibles</label>
+              <input 
+                type="number" 
+                id="parking-available" 
+                min="0" 
+                required
+                placeholder="45"
+              >
+              <span class="form-error" id="available-error"></span>
+            </div>
+          </div>
+
+          <!-- Horario de Apertura -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="parking-open-time" data-i18n="openingTime">Horario de Apertura</label>
+              <input 
+                type="time" 
+                id="parking-open-time"
+              >
+            </div>
+
+            <!-- Horario de Cierre -->
+            <div class="form-group">
+              <label for="parking-close-time" data-i18n="closingTime">Horario de Cierre</label>
+              <input 
+                type="time" 
+                id="parking-close-time"
+              >
+            </div>
+          </div>
+
+          <!-- Tipo de Parqueo -->
+          <div class="form-group">
+            <label for="parking-type" data-i18n="parkingType">Tipo de Parqueo</label>
+            <select id="parking-type">
+              <option value="street" data-i18n="streetParking">Calle</option>
+              <option value="lot" data-i18n="parkingLot">Lote</option>
+              <option value="garage" data-i18n="garage">Garaje</option>
+              <option value="valet" data-i18n="valet">Valet</option>
+            </select>
+          </div>
+
+          <!-- Descripción -->
+          <div class="form-group">
+            <label for="parking-description" data-i18n="description">Descripción</label>
+            <textarea 
+              id="parking-description" 
+              rows="3"
+              placeholder="Información adicional sobre el parqueo..."
+              data-i18n-placeholder="descriptionPlaceholder"
+            ></textarea>
+          </div>
+
+          <!-- Teléfono de Contacto -->
+          <div class="form-group">
+            <label for="parking-phone" data-i18n="phone">Teléfono de Contacto</label>
+            <input 
+              type="tel" 
+              id="parking-phone"
+              placeholder="+1-809-123-4567"
+              data-i18n-placeholder="phonePlaceholder"
+            >
+          </div>
+
+          <!-- Botones de Acción -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancel-btn" data-i18n="cancel">Cancelar</button>
+            <button type="submit" class="btn btn-primary" data-i18n="save">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- GRID DE PARQUEOS -->
+    <div id="parkings-grid" class="parkings-grid">
+      <!-- Los parqueos se generan dinámicamente aquí -->
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p data-i18n="footerText">© 2024 GlobeNow. Todos los derechos reservados.</p>
+    <button id="dark-mode-toggle" class="dark-mode-btn" title="Toggle Dark Mode">🌙</button>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="parking-manager.js"></script>
+</body>
+</html>
