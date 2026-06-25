@@ -1,8 +1,8 @@
 # 🌍 GlobeNow - Información Global, al Instante
 
-**GlobeNow** es una aplicación web moderna que centraliza información global incluyendo divisas, criptomonedas, clima y parqueos gratuitos. Caracterizada por su soporte multiidioma, modo oscuro automático y diseño responsivo.
+**GlobeNow** es una aplicación web moderna que centraliza información global incluyendo divisas, criptomonedas, clima, parqueos gratuitos y **reloj de zonas horarias en tiempo real**. Caracterizada por su soporte multiidioma, modo oscuro automático y diseño responsivo.
 
-## ✨ Características
+## ✨ Características Principales
 
 ### 🌐 Multiidioma
 - **Soporte para 3 idiomas**: Español (ES), Inglés (EN), Francés (FR)
@@ -16,7 +16,10 @@
 - **Animaciones fluidas**: Transiciones suaves y agradables
 - **Diseño moderno**: Componentes visuales limpios y profesionales
 
-### 📊 Secciones de Datos
+### 📱 Dos Modos de Visualización
+
+#### 1. **Inicio (index.html)** - Panel Principal
+Información global con 4 secciones:
 
 1. **💱 Divisas**
    - Tipos de cambio en tiempo real
@@ -40,16 +43,31 @@
    - Ubicación de parqueos
    - Porcentaje de ocupación
 
-## 📁 Estructura del Proyecto
+#### 2. **Reloj de Zonas Horarias (timezone-clock.html)** ⏰ NUEVO
+Reloj digital con soporte para múltiples zonas horarias:
+
+- ⏰ **Reloj Digital**: Tiempo en formato 12/24h
+- 🕐 **Reloj Analógico Mini**: Visualización análoga con manecillas
+- 📍 **50+ Zonas Horarias**: Cobertura mundial
+- ⭐ **Favoritos**: Marca tus zonas favoritas
+- 🔍 **Búsqueda**: Encuentra zonas rápidamente
+- 📅 **Información Complementaria**: Fecha y estado del día
+- 💾 **Persistencia**: Guarda tus preferencias
+
+## 📋 Estructura del Proyecto
 
 ```
 GlobeNow/
-├── index.html          # Estructura HTML principal
-├── style.css           # Estilos CSS (variables, responsive, dark mode)
-├── i18n.js             # Sistema de traducción multiidioma
-├── app.js              # Lógica principal de la aplicación
-├── README.md           # Documentación
-└── assets/             # (Opcional) Imágenes y recursos
+├── index.html                    # Página principal (divisas, crypto, clima, parqueos)
+├── timezone-clock.html           # Reloj de zonas horarias
+├── style.css                     # Estilos globales
+├── timezone-clock.css            # Estilos del reloj
+├── i18n.js                       # Sistema de traducción
+├── app.js                        # Lógica principal
+├── timezone-clock.js             # Lógica del reloj de zonas
+├── i18n-extended.json            # Traducciones adicionales
+├── README.md                     # Este archivo
+└── assets/                       # (Opcional) Imágenes y recursos
 ```
 
 ## 🚀 Instalación y Uso
@@ -63,12 +81,70 @@ cd GlobeNow
 
 ### Opción 2: Usar directamente
 
-Abre `index.html` en tu navegador favorito. No requiere servidor ni instalación adicional.
+Abre los archivos HTML directamente en tu navegador. No requiere servidor ni instalación adicional.
 
 ```bash
-open index.html  # macOS
-start index.html # Windows
-xdg-open index.html # Linux
+# macOS
+open index.html
+open timezone-clock.html
+
+# Windows
+start index.html
+start timezone-clock.html
+
+# Linux
+xdg-open index.html
+xdg-open timezone-clock.html
+```
+
+## 🎯 Guía del Reloj de Zonas Horarias
+
+### Características del Reloj
+
+#### Agregar Zonas Horarias
+1. Usa el **selector de zonas** para elegir
+2. O **busca por nombre** de ciudad o región
+3. Haz clic en **"Agregar"** para incluir
+
+#### Zonas Soportadas
+El reloj incluye 50+ zonas horarias de:
+- 🌎 **América**: Nueva York, Los Ángeles, Toronto, México, Brasil, Argentina, Santo Domingo, etc.
+- 🌍 **Europa**: Londres, París, Berlín, Madrid, Roma, Moscú, Estambul, Atenas, etc.
+- 🌏 **Asia**: Tokio, Shanghái, Singapur, Hong Kong, Nueva Delhi, Dubái, Bangkok, Manila, etc.
+- 🏖️ **Oceanía**: Sídney, Auckland, Melbourne, Brisbane, etc.
+- 🌅 **África**: Cairo, Johannesburgo, Lagos, Nairobi, Casablanca, etc.
+
+#### Funcionalidades
+- **⭐ Favoritos**: Marca zonas para que aparezcan primero
+- **🗑️ Eliminar**: Remueve zonas que no necesites
+- **🔄 Restablecer**: Vuelve a las zonas por defecto
+- **📱 Formato 24h**: Cambia entre formato 12/24 horas
+- **🌙 Modo Oscuro**: Automático según preferencias del sistema
+
+### Detalles Visuales
+
+Cada zona horaria muestra:
+- **Nombre de la ciudad** y código de zona
+- **Reloj digital** con actualización en tiempo real
+- **Reloj analógico mini** con manecillas
+- **Fecha** actual en esa zona
+- **Estado del día** (Día ☀️, Tarde, Atardecer 🌅, Noche 🌙)
+
+### Ejemplo de Uso
+
+```javascript
+// Acceder al controlador del reloj
+const clock = window.timezoneClock;
+
+// Agregar zona
+clock.addTimezone('America/New_York');
+
+// Marcar como favorito
+clock.toggleFavorite('Asia/Tokyo');
+
+// Obtener tiempo en una zona
+const time = clock.getTimeInTimezone('Europe/London');
+console.log(time); // { hour: '14', minute: '30', second: '45', ... }
 ```
 
 ## 🛠️ Tecnologías Utilizadas
@@ -76,26 +152,33 @@ xdg-open index.html # Linux
 - **HTML5**: Estructura semántica
 - **CSS3**: Grid layout, Flexbox, Variables CSS, Animaciones
 - **Vanilla JavaScript**: Sin dependencias externas
+- **Intl API**: Para manejo de zonas horarias y formatos
 - **localStorage**: Persistencia de datos
 - **matchMedia API**: Detección de preferencias del sistema
 
 ## 🌍 Sistema de Traducción (i18n)
 
-### Agregar un nuevo idioma
+### Idiomas Soportados
+- 🇪🇸 **Español**
+- 🇬🇧 **Inglés**
+- 🇫🇷 **Francés**
 
-En `i18n.js`, añade a las traducciones:
+### Agregar un Nuevo Idioma
+
+En `i18n.js`, agrega a las traducciones:
 
 ```javascript
 const translations = {
   de: {
     appName: "GlobeNow",
     slogan: "Globale Informationen sofort",
+    timezoneClock: "Zeitzonen-Uhr",
     // ... más traducciones
   }
 };
 ```
 
-Y actualiza el selector en `index.html`:
+Y actualiza el selector en los HTMLs:
 
 ```html
 <select id="language">
@@ -106,7 +189,7 @@ Y actualiza el selector en `index.html`:
 </select>
 ```
 
-### Usar traducción en el código
+### Usar Traducción en el Código
 
 ```javascript
 // Traducir una clave
@@ -127,6 +210,7 @@ En `style.css`, modifica las variables CSS:
   --accent-color: #fbbf24;       /* Amarillo */
   --text-color: #1f2937;         /* Gris oscuro */
   --bg-color: #f9fafb;           /* Blanco */
+  --border-color: #e5e7eb;       /* Gris claro */
 }
 ```
 
@@ -139,7 +223,7 @@ En `style.css`, modifica las variables CSS:
 ## 🌙 Modo Oscuro
 
 - **Automático**: Detecta las preferencias del sistema
-- **Manual**: Usa el botón en el footer
+- **Manual**: Usa el botón en el footer (🌙)
 - **Persistente**: Se guarda en localStorage
 
 ## 📊 Datos Simulados
@@ -166,7 +250,7 @@ Actualmente, los datos mostrados son simulados. Para implementar APIs reales:
 ```javascript
 async loadCryptoReal() {
   try {
-    const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_market_cap=true&include_24hr_change=true');
+    const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_market_cap=true');
     const data = await response.json();
     // Procesar y mostrar datos
   } catch (error) {
@@ -174,6 +258,14 @@ async loadCryptoReal() {
   }
 }
 ```
+
+## 🔗 Enlaces Útiles
+
+- **GitHub**: [salvadorcarrion47-bit/GlobeNow](https://github.com/salvadorcarrion47-bit/GlobeNow)
+- **Página Principal**: [index.html](index.html)
+- **Reloj de Zonas**: [timezone-clock.html](timezone-clock.html)
+- **Issues**: [Reportar Problemas](https://github.com/salvadorcarrion47-bit/GlobeNow/issues)
+- **Discussions**: [Discusiones](https://github.com/salvadorcarrion47-bit/GlobeNow/discussions)
 
 ## 🤝 Contribuir
 
@@ -185,21 +277,35 @@ Las contribuciones son bienvenidas. Por favor:
 4. Push a la rama (`git push origin feature/amazing-feature`)
 5. Abre un Pull Request
 
-## 📝 Licencia
+## 📄 Licencia
 
 Este proyecto está bajo la licencia MIT. Ver `LICENSE` para más detalles.
 
-## 👤 Autor
+## 👨‍💻 Autor
 
 **Salvador Carrión**
 - GitHub: [@salvadorcarrion47-bit](https://github.com/salvadorcarrion47-bit)
-- Email: [Tu email]
+- Email: salvadorcarrion47@gmail.com
 
-## 🔗 Enlaces Útiles
+## 🎉 Cambios Recientes
 
-- [Demo](https://salvadorcarrion47-bit.github.io/GlobeNow)
-- [Issues](https://github.com/salvadorcarrion47-bit/GlobeNow/issues)
-- [Discussions](https://github.com/salvadorcarrion47-bit/GlobeNow/discussions)
+### v2.0 - Reloj de Zonas Horarias
+- ✅ Nuevo módulo de reloj digital multizona
+- ✅ 50+ zonas horarias soportadas
+- ✅ Reloj analógico miniatura
+- ✅ Sistema de favoritos
+- ✅ Búsqueda de zonas horarias
+- ✅ Soporte para formato 12/24 horas
+- ✅ Información de fecha y estado del día
+- ✅ Persistencia en localStorage
+
+### v1.0 - Lanzamiento Inicial
+- ✅ Sistema i18n multiidioma (ES, EN, FR)
+- ✅ Detección automática del idioma del navegador
+- ✅ Modo oscuro automático
+- ✅ Divisas, criptomonedas, clima, parqueos
+- ✅ Responsive design
+- ✅ Animaciones fluidas
 
 ---
 
