@@ -1,0 +1,41 @@
+{
+  "es": {
+    "timezoneClock": "Reloj de Zonas Horarias",
+    "timezoneSlogan": "Hora en tiempo real alrededor del mundo",
+    "searchTimezone": "Buscar zona horaria...",
+    "selectToAdd": "Seleccionar para agregar...",
+    "addZone": "Agregar",
+    "reset": "Restablecer",
+    "format24h": "Formato 24h",
+    "date": "Fecha",
+    "status": "Estado",
+    "noTimezones": "No hay zonas horarias seleccionadas",
+    "footerText": "© 2024 GlobeNow. Todos los derechos reservados."
+  },
+  "en": {
+    "timezoneClock": "Timezone Clock",
+    "timezoneSlogan": "Real-time clock around the world",
+    "searchTimezone": "Search timezone...",
+    "selectToAdd": "Select to add...",
+    "addZone": "Add",
+    "reset": "Reset",
+    "format24h": "24h Format",
+    "date": "Date",
+    "status": "Status",
+    "noTimezones": "No timezones selected",
+    "footerText": "© 2024 GlobeNow. All rights reserved."
+  },
+  "fr": {
+    "timezoneClock": "Horloge des Fuseaux Horaires",
+    "timezoneSlogan": "Horloge en temps réel autour du monde",
+    "searchTimezone": "Rechercher un fuseau horaire...",
+    "selectToAdd": "Sélectionner pour ajouter...",
+    "addZone": "Ajouter",
+    "reset": "Réinitialiser",
+    "format24h": "Format 24h",
+    "date": "Date",
+    "status": "Statut",
+    "noTimezones": "Aucun fuseau horaire sélectionné",
+    "footerText": "© 2024 GlobeNow. Tous les droits réservés."
+  }
+}
