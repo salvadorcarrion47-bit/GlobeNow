@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="appName">GlobeNow</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- HEADER CON SELECTOR DE IDIOMA -->
+  <header class="hero">
+    <div class="hero-logo">
+      <span class="logo-icon">🌍</span>
+      <span class="logo-text" data-i18n="appName">GlobeNow</span>
+    </div>
+
+    <p class="hero-slogan" data-i18n="slogan">Información global, al instante</p>
+
+    <button class="hero-btn" data-i18n="start">Empezar ahora</button>
+
+    <div class="lang-selector">
+      <label for="language" data-i18n="selectLanguage">Idioma:</label>
+      <select id="language">
+        <option value="es">🇪🇸 Español</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="fr">🇫🇷 Français</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="container">
+    <!-- TARJETA DIVISAS -->
+    <section class="card">
+      <div class="card-header">
+        <span class="card-icon">💱</span>
+        <h2 data-i18n="divisas">Divisas</h2>
+      </div>
+      <div id="divisas-content" class="card-content">
+        <div class="loading" data-i18n="loading">Cargando...</div>
+      </div>
+    </section>
+
+    <!-- TARJETA CRIPTOMONEDAS -->
+    <section class="card">
+      <div class="card-header">
+        <span class="card-icon">₿</span>
+        <h2 data-i18n="crypto">Criptomonedas</h2>
+      </div>
+      <div id="crypto-content" class="card-content">
+        <div class="loading" data-i18n="loading">Cargando...</div>
+      </div>
+    </section>
+
+    <!-- TARJETA CLIMA -->
+    <section class="card">
+      <div class="card-header">
+        <span class="card-icon">🌤️</span>
+        <h2 data-i18n="clima">Clima</h2>
+      </div>
+      <div id="clima-content" class="card-content">
+        <div class="loading" data-i18n="loading">Cargando...</div>
+      </div>
+    </section>
+
+    <!-- TARJETA PARQUEOS -->
+    <section class="card">
+      <div class="card-header">
+        <span class="card-icon">🅿️</span>
+        <h2 data-i18n="parking">Parqueos Gratuitos</h2>
+      </div>
+      <div id="parking-content" class="card-content">
+        <div class="loading" data-i18n="loading">Cargando...</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p data-i18n="footerText">© 2024 GlobeNow. Todos los derechos reservados.</p>
+    <button id="dark-mode-toggle" class="dark-mode-btn" title="Toggle Dark Mode">🌙</button>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
